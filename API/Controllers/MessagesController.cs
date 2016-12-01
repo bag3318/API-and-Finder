@@ -7,7 +7,7 @@ using System.Text;
 using System.Collections.Specialized;
 using System.Data.SqlClient;
 
-namespace API.Controllers
+namespace API.Controllers // define namespace
 {
     public class MessageController : ApiController
     {
@@ -242,11 +242,9 @@ namespace API.Controllers
             }
         }
         /*
-		 * WARNING: DO NOT DELETE CODE BELOW!
-		 * XML IS BELOW
+		 * WARNING: DO NOT DELETE XML CODE BELOW!
 		 */
 
-        // we use 3 foward slashes for inputing xml asp.net C#
         /// <summary>
         /// 	Executes given Stored Procedue and returns integer 
         /// </summary>

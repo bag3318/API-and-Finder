@@ -12,10 +12,8 @@ namespace API.Models
         private string id;
         public string Id
         {
-            // getter(s) and setter(s)
-            get { return Id; } // return the public Id
-            set { Id = value; } // set the Id equal to the value of id in sql dbs
-
+            get { return Id; }
+            set { Id = value; }
         }
         private string message1;
         public string Message1
@@ -29,8 +27,6 @@ namespace API.Models
             get { return Rating; }
             set { Rating = value; }
         }
-
-
         private List<Message> messages;
         public List<Message> Messages
         {
