@@ -12,20 +12,20 @@ namespace API.Models
         private string id;
         public string Id
         {
-            get { return Id; }
-            set { Id = value; }
+            get { return id; }
+            set { id = value; }
         }
         private string message1;
         public string Message1
         {
-            get { return Message1; }
-            set { Message1 = value; }
+            get { return message1; }
+            set { message1 = value; }
         }
         private string rating;
         public string Rating
         {
-            get { return Rating; }
-            set { Rating = value; }
+            get { return rating; }
+            set { rating = value; }
         }
         private List<Message> messages;
         public List<Message> Messages
