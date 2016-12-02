@@ -64,7 +64,7 @@ namespace API.Controllers // define namespace
         [HttpGet] // HTTP GET request, define that we are doing a get request
         [ActionName("RetrieveMessage")] // define the action name
         public List<Message> RetrieveMessagesById(int id) // define new public list for message while passing in the integer id
-        {
+        { // open method
             StringBuilder mySql = new StringBuilder(); // define a new stringbuilder to pass in sql statements
             mySql.Append("SELECT * FROM "); // select all from
             mySql.Append("message "); // message
@@ -74,7 +74,7 @@ namespace API.Controllers // define namespace
             List<Message> messages = new List<Message>(); // define new list of messages, of type Message
             return messages = MessageData(mySql.ToString()); // return messages with the sql statement
 
-        }
+        } // close method
         [HttpPost] // specify the http protocal method
         [ActionName("AddMessage")] // add our action name
 
@@ -177,7 +177,7 @@ namespace API.Controllers // define namespace
 
         }
        /*
-        *  // since we do not need edit the messages, we will not need a put request
+        *  // since we do not need edit the messages, we will not need a put request (we don't need to push anything)
         *  [HttpPut] // put request
         *  [ActionName("UpdateMessage")]
         *  public Message ChangeMessage(Message message)
@@ -251,3 +251,4 @@ namespace API.Controllers // define namespace
         }
     }
 }
+
