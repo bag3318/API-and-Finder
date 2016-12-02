@@ -8,50 +8,50 @@ using System.Collections.Specialized;
 using MySql.Data.MySqlClient;
 namespace API.Controllers // define namespace
 {
-    public class MessageController : ApiController
+    public class MessageController : ApiController // define controller class
     {
         string connectionString = ConfigurationManager.AppSettings["sql"]; // define app settings
-        public List<Message> MessageData(string sql)
+        public List<Message> MessageData(string sql) // pass in string sql
         {
-            MySqlCommand mySqlCommandMessage;
-            MySqlDataReader mySqlDataReaderMessage;
-            MySqlConnection mySqlConnectionMessage = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommandMessage; // define mysql command
+            MySqlDataReader mySqlDataReaderMessage; // define sql data reader
+            MySqlConnection mySqlConnectionMessage = new MySqlConnection(connectionString); // define new connection
             List<Message> messages = new List<Message>(); // define new message list
             try
             {
-                mySqlConnectionMessage.Open();
-                mySqlCommandMessage = new MySqlCommand(sql, mySqlConnectionMessage);
-                mySqlDataReaderMessage = mySqlCommandMessage.ExecuteReader();
+                mySqlConnectionMessage.Open(); // open the connection
+                mySqlCommandMessage = new MySqlCommand(sql, mySqlConnectionMessage); // define new command passing in string sql and the connection
+                mySqlDataReaderMessage = mySqlCommandMessage.ExecuteReader(); // execute
                 if (mySqlDataReaderMessage.HasRows) // if the table has rows
                 {
                     while (mySqlDataReaderMessage.Read()) // read the mySql data table
                     {
-                        Message message = new Message();
-                        message.Message1 = mySqlDataReaderMessage["message"].ToString().Trim();
-                        message.Id = mySqlDataReaderMessage["id"].ToString().Trim();
-                        message.Rating = mySqlDataReaderMessage["rating"].ToString().Trim();
-                        messages.Add(message);
+                        Message message = new Message(); // add new message
+                        message.Message1 = mySqlDataReaderMessage["message"].ToString().Trim(); // add message from the db
+                        message.Id = mySqlDataReaderMessage["id"].ToString().Trim(); // id
+                        message.Rating = mySqlDataReaderMessage["rating"].ToString().Trim(); // and rating
+                        messages.Add(message); // finally, append the message
                     }
                 }
                 // close all connections and readers
-                mySqlDataReaderMessage.Close();
-                mySqlConnectionMessage.Close();
+                mySqlDataReaderMessage.Close(); // first close the datareader
+                mySqlConnectionMessage.Close(); // then close the connection
                 return messages; // make sure all code paths return something
 
 
             }
-            catch (MySqlException mySqlException) // here is our catch statement
+            catch (MySqlException mySqlException) // we put the general exception first
             {
-                string excptn = mySqlException.Message;
-                return messages;
+                string excptn = mySqlException.Message; // catch the message error
+                return messages; // return messages
 
             }
-            catch (Exception err)
+            catch (Exception err) // then this exception
             {
-                string errMsg = err.Message;
-                return messages;
+                string errMsg = err.Message; // output the error in a string
+                return messages; // return messages
             }
-            finally
+            finally // this will execute no matter what
             {
                 if (mySqlConnectionMessage != null) // if not null
                 {
@@ -63,17 +63,16 @@ namespace API.Controllers // define namespace
 
         [HttpGet] // HTTP GET request
         [ActionName("RetrieveMessage")]
-
-        public List<Message> RetrieveMessagesById(int id)
+        public List<Message> RetrieveMessagesById(int id) // define new public list for message while passing in the integer id
         {
-            StringBuilder mySql = new StringBuilder();
+            StringBuilder mySql = new StringBuilder(); // define a new stringbuilder to pass in sql statements
             mySql.Append("SELECT * FROM ");
             mySql.Append("message ");
             mySql.Append("WHERE ");
             mySql.Append("id = ");
             mySql.Append("'" + id + "'");
-            List<Message> messages = new List<Message>();
-            return messages = MessageData(mySql.ToString());
+            List<Message> messages = new List<Message>(); // define new list
+            return messages = MessageData(mySql.ToString()); // return messages with the sql statement
 
         }
         [HttpPost] // specify the http protocal method
@@ -91,7 +90,7 @@ namespace API.Controllers // define namespace
                 {
                     paramsList.Add("@id", message.Id); // add the id parameter from the database table
                     paramsList.Add("@message", message.Messages); // do the same thing for message
-                    paramsList.Add("@rating", message.Rating);
+                    paramsList.Add("@rating", message.Rating); // and for rating
                     int status = ExecSPWithParams("dbo.insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 
                     if (status > 0) // if the status is greater than zero
                     {
@@ -132,12 +131,12 @@ namespace API.Controllers // define namespace
         [ActionName("RemoveMessage")]
         public Message RemoveMessage(Message message)
         {
-            MySqlConnection MySqlConnection = new MySqlConnection(connectionString);
+            MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
 
             ListDictionary paramsList = new ListDictionary();
             try
             {
-                MySqlConnection.Open();
+                mySqlConnection.Open();
                 paramsList.Add("@id", message.Id);
                 paramsList.Add("@message", message.Message1);
                 paramsList.Add("@rating", message.Rating);
@@ -151,12 +150,12 @@ namespace API.Controllers // define namespace
                 {
                     message.IsDbChangeSuccessful = false;
                 }
-                MySqlConnection.Close();
+                mySqlConnection.Close();
                 return message;
             }
-            catch (MySqlException MySqlException) // put first becuase of general exception
+            catch (MySqlException mySqlException) // put first becuase of general exception
             {
-                message.ExcptnMsg = MySqlException.Message;
+                message.ExcptnMsg = mySqlException.Message;
                 message.Id = "0";
                 return message;
             }
@@ -168,9 +167,9 @@ namespace API.Controllers // define namespace
             }
             finally // and this finally statement executes regardless
             {
-                if (MySqlConnection != null) // if the mySql connection isnt null
+                if (mySqlConnection != null) // if the mySql connection isnt null
                 {
-                    MySqlConnection.Dispose(); // then lets dispose it
+                    mySqlConnection.Dispose(); // then lets dispose it
                 }
 
             }
@@ -181,13 +180,13 @@ namespace API.Controllers // define namespace
         public Message ChangeMessage(Message message)
         {
 
-            MySqlConnection MySqlConnection = new MySqlConnection(connectionString);
+            MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
 
             ListDictionary paramsList = new ListDictionary();
 
             try
             {
-                MySqlConnection.Open();
+                mySqlConnection.Open();
 
                 paramsList.Add("@id", message.Id);
                 paramsList.Add("@message", message.Message1);
@@ -203,7 +202,7 @@ namespace API.Controllers // define namespace
                     message.IsDbChangeSuccessful = false;
                 }
 
-                MySqlConnection.Close();
+                mySqlConnection.Close();
                 return message;
             }
 
@@ -223,9 +222,9 @@ namespace API.Controllers // define namespace
             }
             finally
             {
-                if (MySqlConnection != null)
+                if (mySqlConnection != null)
                 {
-                    MySqlConnection.Dispose();
+                    mySqlConnection.Dispose();
                 }
 
             }
