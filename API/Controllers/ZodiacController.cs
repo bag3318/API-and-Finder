@@ -71,7 +71,8 @@ namespace API.Controllers
         /*
          * WARNING: DO NOT DELETE THE XML CODE BELOW!
          */
-        /// <!--d eifne our summary -->
+         // we use 3 foward slashes for programmign xml in visual c# (asp.net)
+        /// <!-- define our summary -->
         /// <summary>
         ///     Executes given Stored Procedure and returns integer
         /// </summary>
