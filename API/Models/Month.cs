@@ -10,32 +10,32 @@ namespace API.Models
         private string id;
         public string Id
         {
-            get { return Id; }
-            set { Id = value; }
+            get { return id; }
+            set { id = value; }
         }
         private string month1;
         public string Month1
         {
-            get { return Month1; }
-            set { Month1 = value; }
+            get { return month1; }
+            set { month1 = value; }
         }
         private string birthstone;
         public string Birthstone
         {
-            get { return Birthstone; }
-            set { Birthstone = value; }
+            get { return birthstone; }
+            set { birthstone = value; }
         }
         private string day;
         public string Day
         {
-            get { return Day; }
-            set { Day = value; }
+            get { return day; }
+            set { day = value; }
         }
         private List<Month> months;
         public List<Month> Months
         {
-            get { return Months; }
-            set { Months = value; }
+            get { return months; }
+            set { months = value; }
         }
         private string excptnMsg;
         public string ExcptnMsg

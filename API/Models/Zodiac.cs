@@ -10,20 +10,20 @@ namespace API.Models
         private string id;
         public string Id
         {
-            get { return Id; }
-            set { Id = value; }
+            get { return id; }
+            set { id = value; }
         }
-        private string zodiasign;
+        private string zodiacSign;
         public string ZodiacSign
         {
-            get { return ZodiacSign; }
-            set { ZodiacSign = value; }
+            get { return zodiacSign; }
+            set { zodiacSign = value; }
         }
-        private List<Zodiac> zodiacs;
-        public List<Zodiac> Zodiacs
+        private List<Zodiac> zodiacSigns;
+        public List<Zodiac> ZodiacSigns
         {
-            get { return Zodiacs; }
-            set { Zodiacs = value; }
+            get { return zodiacSigns; }
+            set { zodiacSigns = value; }
         }
         private string excptnMsg;
         public string ExcptnMsg
