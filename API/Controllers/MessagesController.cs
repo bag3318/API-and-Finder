@@ -6,7 +6,7 @@ using API.Models;
 using System.Text;
 using System.Collections.Specialized;
 using MySql.Data.MySqlClient;
-namespace API.Controllers // define namespace
+namespace API.Controllers
 {
     public class MessageController : ApiController // define controller class
     {
