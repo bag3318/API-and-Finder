@@ -52,13 +52,13 @@ This app Includes
 
 Browser Compatibility
 ---------------------
-
+<center>
 [//]: # (start table)
 |     Edge/IE     |    Safari    |      Chrome      |   Firefox  |    Opera    |
 |-----------------|--------------|------------------|------------|-------------|
 |not compatible :(|6.1.6 or later|34.0.1847 or later|1.3 or later|8.xx or later|
 [//]: # (end table)
-
+</center>
 ## Version Info and History
 
 + _1.1_ - Added Scripts
