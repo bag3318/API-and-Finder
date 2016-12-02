@@ -11,88 +11,80 @@ namespace API.Controllers
 {
     public class ZodiacController : ApiController
     {
-        string connectionString = ConfigurationManager.AppSettings["sql"];
-        public List<Zodiac> ZodiacData(string sql)
+        string connectionString = ConfigurationManager.AppSettings["sql"]; // define app settings
+        public List<Zodiac> ZodiacSignData(string sql) // define new list of type zodiac named Zodiac Sign Data while passing in the string sql
         {
             MySqlCommand mySqlCommandZodiac; // define mysql command
-            MySqlDataReader mySqlDataReaderZodiac; // define sql data reader
+            MySqlDataReader mySqlDataReaderZodiac; // define mysql datareader
             MySqlConnection mySqlConnectionZodiac = new MySqlConnection(connectionString); // define new connection
-            List<Zodiac> zodiacSigns = new List<Zodiac>(); // define new message list
+            List<Zodiac> zodiacSigns = new List<Zodiac>(); // define new list
             try
             {
                 mySqlConnectionZodiac.Open(); // open the connection
-                mySqlCommandZodiac = new MySqlCommand(sql, mySqlConnectionZodiac); // define new command passing in string sql and the connection
-                mySqlDataReaderZodiac = mySqlCommandZodiac.ExecuteReader(); // execute
-                if (mySqlDataReaderZodiac.HasRows) // if the table has rows
+                mySqlCommandZodiac = new MySqlCommand(sql, mySqlConnectionZodiac); // define new mysql command with the string sql and mysql connection zodiac
+                mySqlDataReaderZodiac = mySqlCommandZodiac.ExecuteReader(); // execute reader
+                if (mySqlDataReaderZodiac.HasRows) // if the data table has rows
                 {
-                    while (mySqlDataReaderZodiac.Read()) // read the mySql data table
+                    while (mySqlDataReaderZodiac.Read()) // read the table
                     {
-                        Zodiac zodiac = new Zodiac(); // define new variable zodiac of type Zodiac
-                        zodiac.Id = mySqlDataReaderZodiac["id"].ToString().Trim(); // read the id column
-                        zodiac.ZodiacSign = mySqlDataReaderZodiac["zodiac"].ToString().Trim(); // and the zodiac column
-                        zodiacSigns.Add(zodiac); // finally, append the message
+                        Zodiac zodiac = new Zodiac();  // define new variable zodiac of type zodiac
+                        zodiac.Id = mySqlDataReaderZodiac["id"].ToString().Trim(); // read the id column in the data table
+                        zodiac.ZodiacSign = mySqlDataReaderZodiac["zodiac"].ToString().Trim(); // read the zodiac column on the data table
+                        zodiacSigns.Add(zodiac); // finally, append the zodiac sign
                     }
                 }
-                // close all connections and readers
-                mySqlDataReaderZodiac.Close(); // first close the datareader
-                mySqlConnectionZodiac.Close(); // then close the connection
-                return zodiacSigns; // make sure all code paths return something
-
-
+                mySqlDataReaderZodiac.Close(); // close the data reader
+                mySqlConnectionZodiac.Close(); // close the connection
+                return zodiacSigns; // rmake sure all code paths return a value
             }
-            catch (MySqlException mySqlException) // we put the general exception first
+            catch (MySqlException mySqlException) // put the general exception first
             {
-                string excptn = mySqlException.Message;
-                return zodiacSigns;
-
+                string excptn = mySqlException.Message; // output the error in a string
+                return zodiacSigns; // return zodiac signs
             }
-            catch (Exception err) // then this exception
+            catch (Exception err) // then catch this exception
             {
-                string errMsg = err.Message; // output the error in a string
-                return zodiacSigns; // return zodiacSigns
+                string errMsg = err.Message; // output the error to a string
+                return zodiacSigns; // return zodiac signs
             }
-            finally // this will execute no matter what
+            finally // this statement will execute no matter what
             {
-                if (mySqlConnectionZodiac != null) // if not null
+                if (mySqlConnectionZodiac != null) // if the connection is not null
                 {
-                    mySqlConnectionZodiac.Dispose(); // dump the whole thing
+                    mySqlConnectionZodiac.Dispose(); // dump everything
                 }
-
             }
         }
-
-        [HttpGet] // HTTP GET request, define that we are doing a get request
-        [ActionName("RetrieveZodiacSign")] // define the action name
-        public List<Zodiac> RetrieveZodiacSignById(int id) // define new public list for message while passing in the integer id
+        [HttpGet] // define the http method
+        [ActionName("RetrieveZodiacSign")] // define action name
+        public List<Zodiac> RetrieveZodiacSignById(int id) // make new list of type zodiac while passing in the integer id
         {
-            StringBuilder mySql = new StringBuilder(); // define a new stringbuilder to pass in sql statements
+            StringBuilder mySql = new StringBuilder(); // define new stringbuilder
             mySql.Append("SELECT * FROM "); // select all from
-            mySql.Append("zodiac_sign "); // the zodiac table
-            mySql.Append("WHERE "); // where the
-            mySql.Append("id = "); // id is equal to
-            mySql.Append("'" + id + "'"); // the integer id
-            List<Zodiac> zodiacSigns = new List<Zodiac>(); // define new list of zodiac signs, of type Zodiac
-            return zodiacSigns = ZodiacData(mySql.ToString()); // return zodiac signs with the sql statement
-
+            mySql.Append("zodiac_sign "); // the zodiac sign table 
+            mySql.Append("WHERE "); // where
+            mySql.Append("id = "); // the id column equals
+            mySql.Append("'" + id + "'"); // the integer id that we passed into the public list method
+            List<Zodiac> zodiacSigns = new List<Zodiac>(); // deifne new list named zodiacSigns of type list
+            return zodiacSigns = ZodiacSignData(mySql.ToString()); // return zodiac sign data method with the sql string builder, then convert it to a string
         }
         /*
-         * WARNING: DO NOT DELETE XML CODE BELOW!
+         * WARNING: DO NOT DELETE THE XML CODE BELOW!
          */
-
+        /// <!--d eifne our summary -->
         /// <summary>
-        /// 	Executes given Stored Procedue and returns integer 
+        ///     Executes given Stored Procedure and returns integer
         /// </summary>
-        /// <param name="spName">Stored procedure</param>
-        /// <param name="paramsList">Parameter List</param>
-        /// <returns>Integer</returns>
-
-        private int ExecSPWithParams(string spName, ListDictionary paramsList)
+        /// <param name="spName">Stored procedure</param> <!-- define our stored procedure parameter -->
+        /// <param name="paramsList">Parameter List</param> <!-- define our parameter list parameter tag -->
+        /// <returns>Integer</returns> <!-- this is what we will return -->
+        private int ExecSPWithParams(string spName, ListDictionary paramsList) // define new private integer passing in the stored procedure name string and a list dictionary named paramsList
         {
-            MySqlConnection con = new MySqlConnection(connectionString);
-            con.Open();
-            int status = ServerCommon.ExecuteNonQuery(con, spName, paramsList);
-            con.Close();
-            return status;
+            MySqlConnection con = new MySqlConnection(connectionString); // define mysql connection
+            con.Open(); // open the mysql connection
+            int status = ServerCommon.ExecuteNonQuery(con, spName, paramsList); // define the integer status
+            con.Close(); // close the mysql connection
+            return status; // return the integer status
         }
     }
 }
