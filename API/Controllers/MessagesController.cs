@@ -61,16 +61,16 @@ namespace API.Controllers // define namespace
             }
         }
 
-        [HttpGet] // HTTP GET request
-        [ActionName("RetrieveMessage")]
+        [HttpGet] // HTTP GET request, define that we are doing a get request
+        [ActionName("RetrieveMessage")] // define the action name
         public List<Message> RetrieveMessagesById(int id) // define new public list for message while passing in the integer id
         {
             StringBuilder mySql = new StringBuilder(); // define a new stringbuilder to pass in sql statements
-            mySql.Append("SELECT * FROM ");
-            mySql.Append("message ");
-            mySql.Append("WHERE ");
-            mySql.Append("id = ");
-            mySql.Append("'" + id + "'");
+            mySql.Append("SELECT * FROM "); // select all from
+            mySql.Append("message "); // message
+            mySql.Append("WHERE "); // where the
+            mySql.Append("id = "); // id is equal to
+            mySql.Append("'" + id + "'"); // the integer id
             List<Message> messages = new List<Message>(); // define new list
             return messages = MessageData(mySql.ToString()); // return messages with the sql statement
 
