@@ -15,35 +15,26 @@
 CREATE DATABASE `Sample` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci */;
 
 CREATE TABLE `message` (
-    `id` 
-    int    (11)  NOT NULL,
-    `rating` 
-    int    (11)  NOT NULL,
-    `message` 
-    varchar(888) CHARACTER SET latin1 DEFAULT NULL,
-    PRIMARY KEY (`id`)
-)   ENGINE = InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+    `id`      int    (11)                           NOT NULL,
+    `rating`  int    (11)                           NOT NULL,
+    `message` varchar(888) CHARACTER SET latin1 DEFAULT NULL,
+     PRIMARY KEY     (`id`)
+)    ENGINE = InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 
 CREATE TABLE `months` (
-    `id`
-    int    (11) NOT NULL AUTO_INCREMENT,
-    `month`
-    varchar(10) COLLATE latin1_general_ci NOT NULL,
-    `birthstone`
-    varchar(10) COLLATE latin1_general_ci NOT NULL,
-    `days`
-    varchar(45) COLLATE latin1_general_ci NOT NULL,
-    PRIMARY KEY(`id`)
-)   ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = latin1 COLLATE = latin1_general_ci;
+    `id`         int    (11) NOT NULL AUTO_INCREMENT,
+    `month`      varchar(10) COLLATE latin1_general_ci NOT NULL,
+    `birthstone` varchar(10) COLLATE latin1_general_ci NOT NULL,
+    `days`       varchar(45) COLLATE latin1_general_ci NOT NULL,
+     PRIMARY KEY        (`id`)
+)    ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = latin1 COLLATE = latin1_general_ci;
 
 CREATE TABLE `zodiac_sign` (
-    `id`
-    int    (11) NOT NULL AUTO_INCREMENT,
-    `zodiac`
-    varchar(10) COLLATE latin1_general_ci NOT NULL,
-    PRIMARY KEY(`id`)
-)   ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = latin1 COLLATE = latin1_general_ci;
+    `id` int        (11)                           NOT NULL AUTO_INCREMENT,
+    `zodiac` varchar(10) COLLATE latin1_general_ci NOT NULL,
+     PRIMARY KEY    (`id`)
+)    ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = latin1 COLLATE = latin1_general_ci;
 
 INSERT INTO message (message) VALUES ("Great Web API; however, you must finish it.");
 
