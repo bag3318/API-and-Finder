@@ -71,7 +71,7 @@ namespace API.Controllers // define namespace
             mySql.Append("WHERE "); // where the
             mySql.Append("id = "); // id is equal to
             mySql.Append("'" + id + "'"); // the integer id
-            List<Message> messages = new List<Message>(); // define new list
+            List<Message> messages = new List<Message>(); // define new list of messages, of type Message
             return messages = MessageData(mySql.ToString()); // return messages with the sql statement
 
         }
