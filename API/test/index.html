@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,7 +16,23 @@
     <script type="text/javascript" src="../scripts/birthstone.js"></script>
     <script type="text/javascript" src="../scripts/reload.js"></script>
     <script type="text/javascript" src="../scripts/pageLoadCheck.js"></script>
-    <script type="text/javascript" src="../scripts/feedback.js"></script>
+    <script type="text/javascript" src="..scripts/feedback.js"></script>
+    <script src="../scripts/jquery-1.10.2.js"></script>
+    <script>
+         
+        $.ajax({
+            type: 'get',
+            url: "http://localhost:51304/api/Zodiac/2",
+            success: function (zodiacSigns) {
+                $.each(zodiacSigns, function (i, zodiac) {
+                    $("#month").append("<option>" + zodiac.ZodiacSign + "<option>");
+                });
+            },
+            error: function () {
+                alert("error loading messages")
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -24,8 +40,9 @@
         <!--script is placed inside form tag for specific object callbacks-->
         <script type="text/javascript" src="../scripts/zodiac.js"></script>
         <h2>Zodiac Sign Finder</h2>
-        <select id="month" class="shadow pos3">
-            <option value="0" id="willremove">Select Month</option>
+        <select id="month" class="shadow pos3" data-id="{{id}}">
+
+            <!--<option value="0" id="willremove">Select Month</option>
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>
@@ -37,7 +54,7 @@
             <option value="9">September</option>
             <option value="10">October</option>
             <option value="11">November</option>
-            <option value="12">December</option>
+            <option value="12">December</option>-->
         </select>
         <div id="daysList" class="noDisplay pos2">
             <select id="date" class="pos2 shadow">

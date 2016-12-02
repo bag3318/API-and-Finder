@@ -55,7 +55,7 @@ namespace API.Controllers // define namespace
             {
                 if (mySqlConnectionMessage != null) // if not null
                 {
-                    mySqlConnectionMessage.Dispose(); // dump the whole thing
+                    mySqlConnectionMessage.Dispose(); // dump the whole connection
                 }
 
             }
@@ -77,6 +77,7 @@ namespace API.Controllers // define namespace
         }
         [HttpPost] // specify the http protocal method
         [ActionName("AddMessage")] // add our action name
+
         public Message AddMessage(Message message)
         {
 
@@ -186,48 +187,47 @@ namespace API.Controllers // define namespace
         * 
         *  ListDictionary paramsList = new ListDictionary();
         * 
-        *  try
-        *  {
-        *       mySqlConnection.Open();
-        *
-        *       paramsList.Add("@id", message.Id);
-        *       paramsList.Add("@message", message.Message1);
-        *       paramsList.Add("@message", message.Rating);
-        *       int status = ExecSPWithParams("dbo.update_message", paramsList);
-        *
-        *       if (status > 0)
+        *       try
         *       {
-        *           message.IsDbChangeSuccessful = true;
+        *           mySqlConnection.Open();
+        *
+        *           paramsList.Add("@id", message.Id);
+        *           paramsList.Add("@message", message.Message1);
+        *           paramsList.Add("@message", message.Rating);
+        *           int status = ExecSPWithParams("dbo.update_message", paramsList);
+        *
+        *           if (status > 0)
+        *           {
+        *               message.IsDbChangeSuccessful = true;
+        *           }
+        *           else
+        *           {
+        *               message.IsDbChangeSuccessful = false;
+        *           }
+        * 
+        *           mySqlConnection.Close();
+        *           return message;
         *       }
-        *       else
+        *  
+        *       catch (MySqlException MySqlException)
         *       {
         *           message.IsDbChangeSuccessful = false;
+        *           message.ExcptnMsg = MySqlException.Message;
+        *           return message;
         *       }
-        * 
-        *       mySqlConnection.Close();
-        *       return message;
-        *   }
-        *  
-        *   catch (MySqlException MySqlException)
-        *   {
-        *       message.IsDbChangeSuccessful = false;
-        *       message.ExcptnMsg = MySqlException.Message;
-        *       return message;
-        *   }
-        *   catch (Exception err)
-        *   {
-        *       message.IsDbChangeSuccessful = false;
-        *       message.ExcptnMsg = err.Message;
-        *       return message;
-        *   }
-        *   finally
-        *   {
-        *       if (mySqlConnection != null)
+        *       catch (Exception err)
         *       {
-        *           mySqlConnection.Dispose();
+        *           message.IsDbChangeSuccessful = false;
+        *           message.ExcptnMsg = err.Message;
+        *           return message;
         *       }
-        *    }
-        * }
+        *       finally
+        *       {
+        *          {
+        *               mySqlConnection.Dispose();
+        *          }
+        *      }
+        *  }
         */
 
         /*
