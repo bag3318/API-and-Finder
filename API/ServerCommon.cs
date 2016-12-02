@@ -5,7 +5,7 @@ using System.Web;
 
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Collections;
 using System.Collections.Specialized;
 
@@ -14,9 +14,9 @@ namespace API
     public class ServerCommon
     {
         private static int m_CommandTimeout = 300;
-        private static Hashtable m_SqlCommandCache = new Hashtable();
+        private static Hashtable m_MySqlCommandCache = new Hashtable();
 
-        public static int ExecuteNonQuery(SqlConnection connection, string procedure, ListDictionary parameterValues)
+        public static int ExecuteNonQuery(MySqlConnection connection, string procedure, ListDictionary parameterValues)
         {
             bool flag = false;
             try
@@ -25,7 +25,7 @@ namespace API
                     throw new ArgumentException("Valid connection is required.");
                 if (procedure == null || procedure == "")
                     throw new ArgumentException("Valid procedure is required.");
-                SqlCommand sqlCommand = ServerCommon.GetSqlCommand(connection.ConnectionString, procedure);
+                MySqlCommand sqlCommand = ServerCommon.GetMySqlCommand(connection.ConnectionString, procedure);
                 sqlCommand.Connection = connection;
                 ServerCommon.SetParameterValues(sqlCommand, parameterValues);
                 if (connection.State == ConnectionState.Closed)
@@ -47,23 +47,23 @@ namespace API
                     connection.Close();
             }
         }
-        public static SqlCommand GetSqlCommand(string connectionString, string procedure)
+        public static MySqlCommand GetMySqlCommand(string connectionString, string procedure)
         {
             try
             {
                 if (procedure == null || procedure == "" || (connectionString == null || connectionString == ""))
-                    return (SqlCommand)null;
-                SqlCommand sqlCommand = ServerCommon.Get(true, connectionString, procedure);
+                    return (MySqlCommand)null;
+                MySqlCommand sqlCommand = ServerCommon.Get(true, connectionString, procedure);
                 if (sqlCommand != null)
                     return sqlCommand;
-                SqlConnection connection = new SqlConnection(connectionString);
+                MySqlConnection connection = new MySqlConnection(connectionString);
                 try
                 {
-                    SqlCommand command = new SqlCommand(procedure, connection);
+                    MySqlCommand command = new MySqlCommand(procedure, connection);
                     command.CommandType = CommandType.StoredProcedure;
                     connection.Open();
-                    SqlCommandBuilder.DeriveParameters(command);
-                    foreach (SqlParameter sqlParameter in (DbParameterCollection)command.Parameters)
+                    MySqlCommandBuilder.DeriveParameters(command);
+                    foreach (MySqlParameter sqlParameter in (DbParameterCollection)command.Parameters)
                         sqlParameter.SourceColumn = sqlParameter.ParameterName.Substring(1, sqlParameter.ParameterName.ToString().Length - 1);
                     ServerCommon.Add(command);
                     command.CommandTimeout = ServerCommon.m_CommandTimeout;
@@ -84,13 +84,13 @@ namespace API
                 throw ex;
             }
         }
-        public static void SetParameterValues(SqlCommand command, ListDictionary parameterValues)
+        public static void SetParameterValues(MySqlCommand command, ListDictionary parameterValues)
         {
             try
             {
                 if (command == null || parameterValues == null)
                     return;
-                foreach (SqlParameter sqlParameter in (DbParameterCollection)command.Parameters)
+                foreach (MySqlParameter sqlParameter in (DbParameterCollection)command.Parameters)
                 {
                     if (parameterValues.Contains((object)sqlParameter.ParameterName))
                     {
@@ -109,13 +109,13 @@ namespace API
                 throw;
             }
         }
-        public static void GetParameterValues(SqlCommand command, ListDictionary parameterValues)
+        public static void GetParameterValues(MySqlCommand command, ListDictionary parameterValues)
         {
             try
             {
                 if (command == null || parameterValues == null)
                     return;
-                foreach (SqlParameter sqlParameter in (DbParameterCollection)command.Parameters)
+                foreach (MySqlParameter sqlParameter in (DbParameterCollection)command.Parameters)
                 {
                     if (sqlParameter.Direction == ParameterDirection.ReturnValue)
                         parameterValues[(object)sqlParameter.ParameterName] = sqlParameter.Value;
@@ -133,22 +133,22 @@ namespace API
                 throw;
             }
         }
-        public static SqlCommand Get(bool clone, string connectionString, string commandText)
+        public static MySqlCommand Get(bool clone, string connectionString, string commandText)
         {
             if (connectionString == null || connectionString == "" || (commandText == null || commandText == ""))
-                return (SqlCommand)null;
-            SqlCommand sqlCommand = (SqlCommand)ServerCommon.m_SqlCommandCache[(object)(commandText + "@" + connectionString)];
+                return (MySqlCommand)null;
+            MySqlCommand sqlCommand = (MySqlCommand)ServerCommon.m_MySqlCommandCache[(object)(commandText + "@" + connectionString)];
             if (sqlCommand != null && clone)
-                return (SqlCommand)((ICloneable)sqlCommand).Clone();
+                return (MySqlCommand)((ICloneable)sqlCommand).Clone();
             return sqlCommand;
         }
-        public static void Add(SqlCommand command)
+        public static void Add(MySqlCommand command)
         {
             try
             {
                 if (command == null)
                     throw new NullReferenceException("Connection is null.  Command cache requires a connection string.");
-                ServerCommon.m_SqlCommandCache[(object)(command.CommandText + "@" + command.Connection.ConnectionString)] = (object)command;
+                ServerCommon.m_MySqlCommandCache[(object)(command.CommandText + "@" + command.Connection.ConnectionString)] = (object)command;
             }
             catch
             {

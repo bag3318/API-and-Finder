@@ -88,3 +88,4 @@ C:\Users\Brock\Desktop\Projects\APIforFinder\API\bin\System.Web.Http.Owin.xml
 C:\Users\Brock\Desktop\Projects\APIforFinder\API\obj\Debug\API.csprojResolveAssemblyReference.cache
 C:\Users\Brock\Desktop\Projects\APIforFinder\API\obj\Debug\API.dll
 C:\Users\Brock\Desktop\Projects\APIforFinder\API\obj\Debug\API.pdb
+C:\Users\Brock\Desktop\Projects\APIforFinder\API\bin\MySql.Data.dll

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Your ASP.NET application</title>
+    <title>My ASP.NET application</title>
     <style>
         body {
             background: #fff;
@@ -33,10 +33,10 @@
             line-height: 50px;
         }
 
-        #main {
+        #main, #submain {
             padding: 5px 30px;
         }
-
+        
         .section {
             width: 21.7%;
             float: left;
@@ -56,21 +56,21 @@
                 margin-left: 0;
             }
 
-                .section.first h2 {
-                    font-size: 24px;
-                    text-transform: none;
-                    margin-bottom: 25px;
-                    border: none;
-                }
-
-                .section.first li {
-                    border-top: 1px solid silver;
-                    padding: 8px 0;
-                }
-
-            .section.last {
-                margin-right: 0;
+            .section.first h2 {
+                font-size: 24px;
+                text-transform: none;
+                margin-bottom: 25px;
+                border: none;
             }
+
+            .section.first li {
+                border-top: 1px solid silver;
+                padding: 8px 0;
+            }
+
+        .section.last {
+            margin-right: 0;
+        }
 
         ul {
             list-style: none;
@@ -88,16 +88,34 @@
             text-decoration: none;
         }
 
-            a:hover {
+        a:hover {
                 text-decoration: underline;
-            }
+        }
     </style>
 </head>
 <body>
+    <div id="header">
+        <h1>Finder ASP.net Web API</h1>
+        <hr/>
+    </div>
+    <div id="main">
+        <h2>About This API</h2>
+        <hr/>
+        <p>
+            <span>This API acts as the middle man between the SQL Server Database and the Finder Web App.</span>
+            <br/>
+            <span>This API is what is known as a RESTful API.</span>
+        </p>
+    </div>
+    <div id="submain">
+        <h3>About REST API's</h3>
+        <hr/>
+        <p>REST api's are referred to as Responisve </p>
+    </div>
 
     <div id="header">
-        <h1>Your ASP.NET application</h1>
-        <p>Congratulations! You've created a project</p>
+        <h1>My ASP.NET application</h1>
+        <!--<p>Congratulations! You've created a project</p>-->
     </div>
 
     <div id="main">
@@ -145,5 +163,6 @@
             </ul>
         </div>
     </div>
+
 </body>
 </html>
