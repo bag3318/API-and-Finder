@@ -27,9 +27,9 @@ namespace API.Controllers
                 {
                     while (mySqlDataReaderZodiac.Read()) // read the mySql data table
                     {
-                        Zodiac zodiac = new Zodiac();
-                        zodiac.Id = mySqlDataReaderZodiac["id"].ToString().Trim();
-                        zodiac.ZodiacSign = mySqlDataReaderZodiac["zodiac"].ToString().Trim();
+                        Zodiac zodiac = new Zodiac(); // define new variable zodiac of type Zodiac
+                        zodiac.Id = mySqlDataReaderZodiac["id"].ToString().Trim(); // read the id column
+                        zodiac.ZodiacSign = mySqlDataReaderZodiac["zodiac"].ToString().Trim(); // and the zodiac column
                         zodiacSigns.Add(zodiac); // finally, append the message
                     }
                 }

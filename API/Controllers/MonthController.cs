@@ -5,7 +5,7 @@ using System.Web.Http;
 using API.Models;
 using System.Text;
 using System.Collections.Specialized;
-using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;// define mysql statement
 
 namespace API.Controllers
 {
@@ -28,10 +28,10 @@ namespace API.Controllers
                     while (mySqlDataReaderMonth.Read()) // read the mySql data table
                     {
                         Month month = new Month();
-                        month.Id = mySqlDataReaderMonth["id"].ToString().Trim();
-                        month.Birthstone = mySqlDataReaderMonth["birthstone"].ToString().Trim();
-                        month.Day = mySqlDataReaderMonth["days"].ToString().Trim();
-                        month.Month1 = mySqlDataReaderMonth["month"].ToString().Trim();
+                        month.Id = mySqlDataReaderMonth["id"].ToString().Trim(); // read the id column
+                        month.Birthstone = mySqlDataReaderMonth["birthstone"].ToString().Trim(); // the birthstone column
+                        month.Day = mySqlDataReaderMonth["days"].ToString().Trim(); // the days column
+                        month.Month1 = mySqlDataReaderMonth["month"].ToString().Trim(); // and the month column
                         months.Add(month); // finally, append the message
                     }
                 }
