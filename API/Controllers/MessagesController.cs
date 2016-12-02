@@ -175,60 +175,60 @@ namespace API.Controllers // define namespace
             }
 
         }
-        /*
-         * // since we do not need edit the messages, we will not need a put request
-         * [HttpPut] // put request
-         * [ActionName("UpdateMessage")]
-         * public Message ChangeMessage(Message message)
-         * {
-         *  
-         * MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
-         * 
-         * ListDictionary paramsList = new ListDictionary();
-         * 
-         * try
-         * {
-         *      mySqlConnection.Open();
-         *
-         *      paramsList.Add("@id", message.Id);
-         *      paramsList.Add("@message", message.Message1);
-         *      paramsList.Add("@message", message.Rating);
-         *      int status = ExecSPWithParams("dbo.update_message", paramsList);
-         *
-         *      if (status > 0)
-         *      {
-         *          message.IsDbChangeSuccessful = true;
-         *      }
-         *      else
-         *      {
-         *          message.IsDbChangeSuccessful = false;
-         *      }
-         * 
-         *      mySqlConnection.Close();
-         *      return message;
-         *  }
-         *  
-         *  catch (MySqlException MySqlException)
-         *  {
-         *      message.IsDbChangeSuccessful = false;
-         *      message.ExcptnMsg = MySqlException.Message;
-         *      return message;
-         *  }
-         *  catch (Exception err)
-         *  {
-         *      message.IsDbChangeSuccessful = false;
-         *      message.ExcptnMsg = err.Message;
-         *      return message;
-         *  }
-         *  finally
-         *  {
-         *      if (mySqlConnection != null)
-         *      {
-         *          mySqlConnection.Dispose();
-         *      }
-         *   }
-         *}
-         */
+       /*
+        *  // since we do not need edit the messages, we will not need a put request
+        *  [HttpPut] // put request
+        *  [ActionName("UpdateMessage")]
+        *  public Message ChangeMessage(Message message)
+        *  {
+        *  
+        *  MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
+        * 
+        *  ListDictionary paramsList = new ListDictionary();
+        * 
+        *  try
+        *  {
+        *       mySqlConnection.Open();
+        *
+        *       paramsList.Add("@id", message.Id);
+        *       paramsList.Add("@message", message.Message1);
+        *       paramsList.Add("@message", message.Rating);
+        *       int status = ExecSPWithParams("dbo.update_message", paramsList);
+        *
+        *       if (status > 0)
+        *       {
+        *           message.IsDbChangeSuccessful = true;
+        *       }
+        *       else
+        *       {
+        *           message.IsDbChangeSuccessful = false;
+        *       }
+        * 
+        *       mySqlConnection.Close();
+        *       return message;
+        *   }
+        *  
+        *   catch (MySqlException MySqlException)
+        *   {
+        *       message.IsDbChangeSuccessful = false;
+        *       message.ExcptnMsg = MySqlException.Message;
+        *       return message;
+        *   }
+        *   catch (Exception err)
+        *   {
+        *       message.IsDbChangeSuccessful = false;
+        *       message.ExcptnMsg = err.Message;
+        *       return message;
+        *   }
+        *   finally
+        *   {
+        *       if (mySqlConnection != null)
+        *       {
+        *           mySqlConnection.Dispose();
+        *       }
+        *    }
+        * }
+        */
 
         /*
 		 * WARNING: DO NOT DELETE XML CODE BELOW!
