@@ -13,45 +13,36 @@ namespace API.Controllers // define namespace
         string connectionString = ConfigurationManager.AppSettings["sql"]; // define app settings
         public List<Message> MessageData(string sql)
         {
-            MySqlCommand MySqlCommandMessage;
-            MySqlDataReader MySqlDataReaderMessage;
-            MySqlConnection MySqlConnection = new MySqlConnection(connectionString);
-            MySqlConnection MySqlConnectionMessage = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommandMessage;
+            MySqlDataReader mySqlDataReaderMessage;
+            MySqlConnection mySqlConnectionMessage = new MySqlConnection(connectionString);
             List<Message> messages = new List<Message>(); // define new message list
             try
             {
-                MySqlConnectionMessage.Open();
-                MySqlCommandMessage = new MySqlCommand(sql, MySqlConnectionMessage);
-                MySqlDataReaderMessage = MySqlCommandMessage.ExecuteReader();
-                if (MySqlDataReaderMessage.HasRows) // if the table has rows
+                mySqlConnectionMessage.Open();
+                mySqlCommandMessage = new MySqlCommand(sql, mySqlConnectionMessage);
+                mySqlDataReaderMessage = mySqlCommandMessage.ExecuteReader();
+                if (mySqlDataReaderMessage.HasRows) // if the table has rows
                 {
-                    while (MySqlDataReaderMessage.Read()) // read the mySql data table
+                    while (mySqlDataReaderMessage.Read()) // read the mySql data table
                     {
                         Message message = new Message();
-                        message.Message1 = MySqlDataReaderMessage["message"].ToString().Trim();
-                        message.Id = MySqlDataReaderMessage["id"].ToString().Trim();
-                        message.Rating = MySqlDataReaderMessage["rating"].ToString().Trim();
+                        message.Message1 = mySqlDataReaderMessage["message"].ToString().Trim();
+                        message.Id = mySqlDataReaderMessage["id"].ToString().Trim();
+                        message.Rating = mySqlDataReaderMessage["rating"].ToString().Trim();
                         messages.Add(message);
-                        StringBuilder MySqlString = new StringBuilder();
-                        MySqlString.Append("SELECT * FROM ");
-                        MySqlString.Append("messages WHERE ");
-                        MySqlString.Append("id = ");
-                        MySqlString.Append("'" + message.Id + "'");
-                        MySqlConnectionMessage.Open();
-                        MySqlCommandMessage = new MySqlCommand(MySqlString.ToString(), MySqlConnectionMessage); // we must convert MySqlString, which is a stringbuilder, to a regular string by using the .ToString() property.
-                        MySqlDataReaderMessage = MySqlCommandMessage.ExecuteReader();
                     }
                 }
                 // close all connections and readers
-                MySqlDataReaderMessage.Close();
-                MySqlConnectionMessage.Close();
+                mySqlDataReaderMessage.Close();
+                mySqlConnectionMessage.Close();
                 return messages; // make sure all code paths return something
 
 
             }
-            catch (MySqlException MySqlException) // here is our catch statement
+            catch (MySqlException mySqlException) // here is our catch statement
             {
-                string excptn = MySqlException.Message;
+                string excptn = mySqlException.Message;
                 return messages;
 
             }
@@ -62,9 +53,9 @@ namespace API.Controllers // define namespace
             }
             finally
             {
-                if (MySqlConnection != null) // if not null
+                if (mySqlConnectionMessage != null) // if not null
                 {
-                    MySqlConnection.Dispose(); // dump the whole thing
+                    mySqlConnectionMessage.Dispose(); // dump the whole thing
                 }
 
             }
@@ -77,7 +68,7 @@ namespace API.Controllers // define namespace
         {
             StringBuilder mySql = new StringBuilder();
             mySql.Append("SELECT * FROM ");
-            mySql.Append("message");
+            mySql.Append("message ");
             mySql.Append("WHERE ");
             mySql.Append("id = ");
             mySql.Append("'" + id + "'");
@@ -90,12 +81,12 @@ namespace API.Controllers // define namespace
         public Message AddMessage(Message message)
         {
 
-            MySqlConnection MySqlConnection = new MySqlConnection(connectionString);
+            MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
             ListDictionary paramsList = new ListDictionary();
 
             try
             {
-                MySqlConnection.Open(); // open mySql connection
+                mySqlConnection.Open(); // open mySql connection
                 foreach (Message message1 in message.Messages) // for each of the messages in the messages column in the db table
                 {
                     paramsList.Add("@id", message.Id); // add the id parameter from the database table
@@ -111,7 +102,7 @@ namespace API.Controllers // define namespace
                         message.Id = "1";
                     }
                 }
-                MySqlConnection.Close();
+                mySqlConnection.Close();
 
                 return message;
 
@@ -130,9 +121,9 @@ namespace API.Controllers // define namespace
             }
             finally
             {
-                if (MySqlConnection != null)
+                if (mySqlConnection != null)
                 {
-                    MySqlConnection.Dispose();
+                    mySqlConnection.Dispose();
                 }
 
             }
