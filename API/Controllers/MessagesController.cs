@@ -80,11 +80,11 @@ namespace API.Controllers // define api namespace: controller
         [HttpPost] // specify the http protocal method
         [ActionName("AddMessage")] // add our action name
 
-        public Message AddMessage(Message message)
+        public Message AddMessage(Message message) // define a new public method of type Message named add message while passing message of type Messsage
         {
 
-            MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
-            ListDictionary paramsList = new ListDictionary();
+            MySqlConnection mySqlConnection = new MySqlConnection(connectionString); // define new mysql connection = to a connection string
+            ListDictionary paramsList = new ListDictionary(); // define a new parameter list of type list dictionary
 
             try
             {
@@ -97,35 +97,35 @@ namespace API.Controllers // define api namespace: controller
                     int status = ExecSPWithParams("insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 
                     if (status > 0) // if the status is greater than zero
                     {
-                        message.Id = paramsList["ID"].ToString();
+                        message.Id = paramsList["ID"].ToString(); // add the id to a string
                     }
                     else
                     {
-                        message.Id = "1";
+                        message.Id = "1"; // else set the id equal to 1
                     }
                 }
-                mySqlConnection.Close();
+                mySqlConnection.Close(); // close the connection
+                
+                return message; // and return the message
 
-                return message;
-
             }
-            catch (MySqlException mySqlException)
+            catch (MySqlException mySqlException) // for our catch statement, we put the general exception first
             {
-                message.ExcptnMsg = mySqlException.Message;
-                message.Id = "0";
-                return message;
+                message.ExcptnMsg = mySqlException.Message; // so we output the error here
+                message.Id = "0"; // set the message's id = to 0
+                return message; // and return the message itself to make sure all code paths return a value
             }
-            catch (Exception err)
+            catch (Exception err) // then we put this exception in our second catch statement
             {
-                message.ExcptnMsg = err.Message;
-                message.Id = "0";
-                return message;
+                message.ExcptnMsg = err.Message; // output the error message here
+                message.Id = "0"; // set the messsage's id = 0
+                return message; // and return the message
             }
-            finally
+            finally // finally (this will execute no matter what)
             {
-                if (mySqlConnection != null)
+                if (mySqlConnection != null) // if the mysql connection is NOT = to null (nothing)
                 {
-                    mySqlConnection.Dispose();
+                    mySqlConnection.Dispose(); // dipsose the whole connection
                 }
 
             }

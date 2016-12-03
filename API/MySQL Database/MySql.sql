@@ -68,3 +68,16 @@ INSERT INTO zodiac_sign (zodiac) VALUES (   "Virgo"   );
 INSERT INTO zodiac_sign (zodiac) VALUES (   "Libra"   );
 INSERT INTO zodiac_sign (zodiac) VALUES (  "Scorpio"  );
 INSERT INTO zodiac_sign (zodiac) VALUES ("Sagittarius");
+
+USE `finder`;
+DROP procedure IF EXISTS `insert_message`;
+
+DELIMITER $$
+USE `finder`$$
+create definer=`root`@`localhost`procedure`insert_message`(rate smallint, usrmsg varchar(888))
+begin
+insert into message (rating, usrmessage) values (rate, usrmsg);
+select LAST_INSERT_ID();
+
+END$$ 
+
