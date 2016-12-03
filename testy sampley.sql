@@ -1,10 +1,12 @@
+delimiter $$
+
 create procedure insert_message()
 
 begin
 
-declare @rate smallint(2);
-declare @usrmessage varchar(888);
+declare rate smallint;
+declare usrmsg varchar(888);
 
-insert into message (rating, usrmessage) values (@rating, @usrmessage);
+insert into message (rating, usrmessage) values (rate, usrmsg);
 
 end;
