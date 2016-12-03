@@ -178,78 +178,78 @@ namespace API.Controllers // define api namespace: controller
             }
 
         }
-       /*
-        *  // since we do not need edit the messages, we will not need a put request (we don't need to push anything)
-        *  [HttpPut] // put request
-        *  [ActionName("UpdateMessage")]
-        *  public Message ChangeMessage(Message message)
-        *  {
-        *  
-        *  MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
-        * 
-        *  ListDictionary paramsList = new ListDictionary();
-        * 
-        *       try
-        *       {
-        *           mySqlConnection.Open();
-        *
-        *           paramsList.Add("@id", message.Id);
-        *           paramsList.Add("@message", message.Message1);
-        *           paramsList.Add("@message", message.Rating);
-        *           int status = ExecSPWithParams("dbo.update_message", paramsList);
-        *
-        *           if (status > 0)
-        *           {
-        *               message.IsDbChangeSuccessful = true;
-        *           }
-        *           else
-        *           {
-        *               message.IsDbChangeSuccessful = false;
-        *           }
-        * 
-        *           mySqlConnection.Close();
-        *           return message;
-        *       }
-        *  
-        *       catch (MySqlException MySqlException)
-        *       {
-        *           message.IsDbChangeSuccessful = false;
-        *           message.ExcptnMsg = MySqlException.Message;
-        *           return message;
-        *       }
-        *       catch (Exception err)
-        *       {
-        *           message.IsDbChangeSuccessful = false;
-        *           message.ExcptnMsg = err.Message;
-        *           return message;
-        *       }
-        *       finally
-        *       {
-        *          {
-        *               mySqlConnection.Dispose();
-        *          }
-        *      }
-        *  }
-        */
+        /*
+         *  // since we do not need edit the messages, we will not need a put request (we don't need to push anything)
+         *  [HttpPut] // put request
+         *  [ActionName("UpdateMessage")]
+         *  public Message ChangeMessage(Message message)
+         *  {
+         *  
+         *  MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
+         * 
+         *  ListDictionary paramsList = new ListDictionary();
+         * 
+         *       try
+         *       {
+         *           mySqlConnection.Open();
+         *
+         *           paramsList.Add("@id", message.Id);
+         *           paramsList.Add("@message", message.Message1);
+         *           paramsList.Add("@message", message.Rating);
+         *           int status = ExecSPWithParams("dbo.update_message", paramsList);
+         *
+         *           if (status > 0)
+         *           {
+         *               message.IsDbChangeSuccessful = true;
+         *           }
+         *           else
+         *           {
+         *               message.IsDbChangeSuccessful = false;
+         *           }
+         * 
+         *           mySqlConnection.Close();
+         *           return message;
+         *       }
+         *  
+         *       catch (MySqlException MySqlException)
+         *       {
+         *           message.IsDbChangeSuccessful = false;
+         *           message.ExcptnMsg = MySqlException.Message;
+         *           return message;
+         *       }
+         *       catch (Exception err)
+         *       {
+         *           message.IsDbChangeSuccessful = false;
+         *           message.ExcptnMsg = err.Message;
+         *           return message;
+         *       }
+         *       finally
+         *       {
+         *          {
+         *               mySqlConnection.Dispose();
+         *          }
+         *      }
+         *  }
+         */
 
         /*
-		 * WARNING: DO NOT DELETE XML CODE BELOW!
-		 */
-
+         * WARNING: DO NOT DELETE THE XML CODE BELOW!
+         */
+        // we use 3 foward slashes for programmign xml in visual c# (asp.net)
+        /// <!-- define our summary -->
         /// <summary>
-        /// 	Executes given Stored Procedue and returns integer 
+        ///     Executes given Stored Procedure and returns integer
         /// </summary>
-        /// <param name="spName">Stored procedure</param>
-        /// <param name="paramsList">Parameter List</param>
-        /// <returns>Integer</returns>
-
-        private int ExecSPWithParams(string spName, ListDictionary paramsList)
+        /// <param name="spName">Stored procedure</param> <!-- define our stored procedure parameter -->
+        /// <param name="paramsList">Parameter List</param> <!-- define our parameter list parameter tag -->
+        /// <returns>Integer</returns> <!-- this is what we will return -->
+        private int ExecSPWithParams(string spName, ListDictionary paramsList) // define new private integer passing in the stored procedure name string and a list dictionary named paramsList
         {
-            MySqlConnection con = new MySqlConnection(connectionString);
-            con.Open();
-            int status = ServerCommon.ExecuteNonQuery(con, spName, paramsList);
-            con.Close();
-            return status;
+            MySqlConnection con = new MySqlConnection(connectionString); // define mysql connection
+            con.Open(); // open the mysql connection
+            int status = ServerCommon.ExecuteNonQuery(con, spName, paramsList); // define the integer status
+            con.Close(); // close the mysql connection
+            return status; // return the integer status
         }
     }
 }

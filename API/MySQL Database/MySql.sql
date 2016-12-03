@@ -18,7 +18,7 @@ CREATE TABLE `message` ( /* create table: message */
     `id`         int    (11)                           NOT NULL, /* create column id that can be up to 11 digits and is an integer, and cannot be null*/
     `rating`     int    (11)                           NOT NULL,
     `usrmessage` varchar(888) CHARACTER SET latin1 DEFAULT NULL, /* type variable character (888 = maximum number of characters) */
-     PRIMARY KEY     (`id`)
+     PRIMARY KEY        (`id`)
 )    ENGINE = InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci; /* define character set: latin1 (basically english), collate: latin1_general: english */
 
 
@@ -36,16 +36,10 @@ CREATE TABLE `zodiac_sign` (
      PRIMARY KEY    (`id`)
 )    ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = latin1 COLLATE = latin1_general_ci;
 
-INSERT INTO message (rating, usrmessage) VALUES (6, "Great Web API; however, you must finish it.");
-INSERT INTO message (rating, usrmessage) VALUES (1, "Bob is a loser"                             );
-
-UPDATE `finder`.`message` 
-SET    `id` = 2, 
-       `rating` = 4, 
-       `message` = 
-"fun fact: freddy mercury's real name is actually freddy bulsara (that was before he changed his last name)."
-WHERE  `id` = 2; 
-
+INSERT INTO message (id, rating, usrmessage) VALUES (1, 6, "Great Web API; however, you must finish it.");
+INSERT INTO message (id, rating, usrmessage) VALUES (2, 3, "Fun Fact: Freddy Mercury's real name was actually Freddy Bulsara (that was before he changed his last name to Mercury).");
+INSERT INTO message (id, rating, usrmessage) VALUES (3, 1, "Bob is a loser"                             );
+INSERT INTO message (id, rating, usrmessage) VALUES (4, 1, "Spencer is a retard and a lunatic"          );
 
 
 INSERT INTO months (month, birthstone, days) VALUES ('January'  , 'Garnet'    , 31); /* insert into the table months; with the format (month, birthstone, days), the values: ('January', 'Garnet', 31); */
