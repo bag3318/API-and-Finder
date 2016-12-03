@@ -12,14 +12,14 @@
 *
 ********************************************************************************************************/
 
-CREATE DATABASE `Sample` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci */;
+CREATE DATABASE `finder` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci */; /* create database: finder */
 
-CREATE TABLE `message` (
-    `id`      int    (11)                           NOT NULL,
-    `rating`  int    (11)                           NOT NULL,
-    `message` varchar(888) CHARACTER SET latin1 DEFAULT NULL,
+CREATE TABLE `message` ( /* create table: message */
+    `id`         int    (11)                           NOT NULL, /* create column id that can be up to 11 digits and is an integer, and cannot be null*/
+    `rating`     int    (11)                           NOT NULL,
+    `usrmessage` varchar(888) CHARACTER SET latin1 DEFAULT NULL, /* type variable character (888 = maximum number of characters) */
      PRIMARY KEY     (`id`)
-)    ENGINE = InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+)    ENGINE = InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci; /* define character set: latin1 (basically english), collate: latin1_general: english */
 
 
 CREATE TABLE `months` (
@@ -36,9 +36,19 @@ CREATE TABLE `zodiac_sign` (
      PRIMARY KEY    (`id`)
 )    ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = latin1 COLLATE = latin1_general_ci;
 
-INSERT INTO message (message) VALUES ("Great Web API; however, you must finish it.");
+INSERT INTO message (rating, usrmessage) VALUES (6, "Great Web API; however, you must finish it.");
+INSERT INTO message (rating, usrmessage) VALUES (1, "Bob is a loser"                             );
 
-INSERT INTO months (month, birthstone, days) VALUES ('January'  , 'Garnet'    , 31);
+UPDATE `finder`.`message`
+SET
+`id` = 2,
+`rating` = 4,
+`message` = "Fun Fact: Freddy Mercury's real name is actually Freddy Bulsara (that was before he changed his last name)."
+WHERE `id` = 2;
+
+
+
+INSERT INTO months (month, birthstone, days) VALUES ('January'  , 'Garnet'    , 31); /* insert into the table months; with the format (month, birthstone, days), the values: ('January', 'Garnet', 31); */
 INSERT INTO months (month, birthstone, days) VALUES ('February' , 'Amethyst'  , 29);
 INSERT INTO months (month, birthstone, days) VALUES ('March'    , 'Aquamarine', 31);
 INSERT INTO months (month, birthstone, days) VALUES ('April'    , 'Diamond'   , 30);

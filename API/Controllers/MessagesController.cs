@@ -6,7 +6,9 @@ using API.Models;
 using System.Text;
 using System.Collections.Specialized;
 using MySql.Data.MySqlClient;
-namespace API.Controllers
+
+
+namespace API.Controllers // define api namespace: controller
 {
     public class MessageController : ApiController // define controller class
     {
@@ -27,7 +29,7 @@ namespace API.Controllers
                     while (mySqlDataReaderMessage.Read()) // read the mySql data table
                     {
                         Message message = new Message(); // add new message
-                        message.Message1 = mySqlDataReaderMessage["message"].ToString().Trim(); // add message from the db
+                        message.Message1 = mySqlDataReaderMessage["usrmessage"].ToString().Trim(); // add message from the db
                         message.Id = mySqlDataReaderMessage["id"].ToString().Trim(); // id
                         message.Rating = mySqlDataReaderMessage["rating"].ToString().Trim(); // and rating
                         messages.Add(message); // finally, append the message
@@ -90,7 +92,7 @@ namespace API.Controllers
                 foreach (Message message1 in message.Messages) // for each of the messages in the messages column in the db table
                 {
                     paramsList.Add("@id", message.Id); // add the id parameter from the database table
-                    paramsList.Add("@message", message.Messages); // do the same thing for message
+                    paramsList.Add("@usrmessage", message.Messages); // do the same thing for message
                     paramsList.Add("@rating", message.Rating); // and for rating
                     int status = ExecSPWithParams("dbo.insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 
                     if (status > 0) // if the status is greater than zero
@@ -139,7 +141,7 @@ namespace API.Controllers
             {
                 mySqlConnection.Open();
                 paramsList.Add("@id", message.Id);
-                paramsList.Add("@message", message.Message1);
+                paramsList.Add("@usrmessage", message.Message1);
                 paramsList.Add("@rating", message.Rating);
                 int status = ExecSPWithParams("dbo.delete_message", paramsList);
 

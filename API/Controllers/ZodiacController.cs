@@ -7,9 +7,9 @@ using System.Text;
 using System.Collections.Specialized;
 using MySql.Data.MySqlClient;
 
-namespace API.Controllers
+namespace API.Controllers // Define namesapce 
 {
-    public class ZodiacController : ApiController
+    public class ZodiacController : ApiController // define public class Zodiac Controller of type ApiController
     {
         string connectionString = ConfigurationManager.AppSettings["sql"]; // define app settings
         public List<Zodiac> ZodiacSignData(string sql) // define new list of type zodiac named Zodiac Sign Data while passing in the string sql
