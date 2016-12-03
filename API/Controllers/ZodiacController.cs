@@ -6,7 +6,7 @@ using API.Models;
 using System.Text;
 using System.Collections.Specialized;
 using MySql.Data.MySqlClient;
-
+// code --> english comments are in green (except for when you see gray <!-- this is a comment -->)
 namespace API.Controllers // Define namesapce 
 {
     public class ZodiacController : ApiController // define public class Zodiac Controller of type ApiController
