@@ -91,13 +91,13 @@ namespace API.Controllers // define api namespace: controller
                 mySqlConnection.Open(); // open mySql connection
                 foreach (Message message1 in message.Messages) // for each of the messages in the messages column in the db table
                 {
-                    paramsList.Add("@id", message.Id); // add the id parameter from the database table
-                    paramsList.Add("@usrmessage", message.Messages); // do the same thing for message
-                    paramsList.Add("@rating", message.Rating); // and for rating
-                    int status = ExecSPWithParams("dbo.insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 
+                    paramsList.Add("ID", message.Id);
+                    paramsList.Add("usrmsg", message.Messages); // do the same thing for message
+                    paramsList.Add("rate", message.Rating); // and for rating
+                    int status = ExecSPWithParams("insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 
                     if (status > 0) // if the status is greater than zero
                     {
-                        message.Id = paramsList["@id"].ToString();
+                        message.Id = paramsList["ID"].ToString();
                     }
                     else
                     {
