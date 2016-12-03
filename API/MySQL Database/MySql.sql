@@ -39,12 +39,12 @@ CREATE TABLE `zodiac_sign` (
 INSERT INTO message (rating, usrmessage) VALUES (6, "Great Web API; however, you must finish it.");
 INSERT INTO message (rating, usrmessage) VALUES (1, "Bob is a loser"                             );
 
-UPDATE `finder`.`message`
-SET
-`id` = 2,
-`rating` = 4,
-`message` = "Fun Fact: Freddy Mercury's real name is actually Freddy Bulsara (that was before he changed his last name)."
-WHERE `id` = 2;
+UPDATE `finder`.`message` 
+SET    `id` = 2, 
+       `rating` = 4, 
+       `message` = 
+"fun fact: freddy mercury's real name is actually freddy bulsara (that was before he changed his last name)."
+WHERE  `id` = 2; 
 
 
 
