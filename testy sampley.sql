@@ -1,9 +1,10 @@
-/*https://dev.mysql.com/doc/connector-net/en/connector-net-tutorials-stored-procedures.html*/
-DELIMITER //
-CREATE PROCEDURE delete_message
-(IN con CHAR(20))
-BEGIN
-  SELECT Name, HeadOfState FROM Country
-  WHERE Continent = con;
-END //
-DELIMITER ;
+create procedure insert_message()
+
+begin
+
+declare @rate smallint(2);
+declare @usrmessage varchar(888);
+
+insert into message (rating, usrmessage) values (@rating, @usrmessage);
+
+end;
