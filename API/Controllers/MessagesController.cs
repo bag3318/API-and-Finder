@@ -80,12 +80,12 @@ namespace API.Controllers // define api namespace: controller
         [HttpPost] // specify the http protocal method
         [ActionName("AddMessage")] // add our action name
 
-        public Message AddMessage(Message usrmessage) // define a new public method of type Message named add message while passing message of type Messsage
+        public Message AddMessage(Message usrmessage) // define a new public method of type Message named add message while passing message of type Messsage // Message usrmessage
         {
 
             MySqlConnection mySqlConnection = new MySqlConnection(connectionString); // define new mysql connection = to a connection string
             ListDictionary paramsList = new ListDictionary(); // define a new parameter list of type list dictionary
-
+            // Message usrmessage = new Message();
             try
             {
                 mySqlConnection.Open(); // open mySql connection

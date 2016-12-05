@@ -12,14 +12,14 @@
 *
 ********************************************************************************************************/
 
-CREATE DATABASE `finder` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci */; /* create database: finder */
+CREATE DATABASE `finder` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_general_ci */; -- create database: finder 
 
-CREATE TABLE `message` ( /* create table: message */
-    `id`         int    (11)                           NOT NULL, /* create column id that can be up to 11 digits and is an integer, and cannot be null*/
+CREATE TABLE `message` ( -- create table: message 
+    `id`         int    (11)                           NOT NULL, -- create column id that can be up to 11 digits and is an integer, and cannot be null
     `rating`     int    (11)                           NOT NULL,
-    `usrmessage` varchar(888) CHARACTER SET latin1 DEFAULT NULL, /* type variable character (888 = maximum number of characters) */
+    `usrmessage` varchar(888) CHARACTER SET latin1 DEFAULT NULL, -- type variable character (888 = maximum number of characters) 
      PRIMARY KEY        (`id`)
-)    ENGINE = InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci; /* define character set: latin1 (basically english), collate: latin1_general: english */
+)    ENGINE = InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci; -- efine character set: latin1 (basically english), collate: latin1_general: english 
 
 
 CREATE TABLE `months` (
@@ -37,12 +37,8 @@ CREATE TABLE `zodiac_sign` (
 )    ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = latin1 COLLATE = latin1_general_ci;
 
 INSERT INTO message (id, rating, usrmessage) VALUES (1, 6, "Great Web API; however, you must finish it.");
-INSERT INTO message (id, rating, usrmessage) VALUES (2, 3, "Fun Fact: Freddy Mercury's real name was actually Freddy Bulsara (that was before he changed his last name to Mercury).");
-INSERT INTO message (id, rating, usrmessage) VALUES (3, 1, "Bob is a loser"                             );
-INSERT INTO message (id, rating, usrmessage) VALUES (4, 1, "Spencer is a retard and a lunatic"          );
 
-
-INSERT INTO months (month, birthstone, days) VALUES ('January'  , 'Garnet'    , 31); /* insert into the table months; with the format (month, birthstone, days), the values: ('January', 'Garnet', 31); */
+INSERT INTO months (month, birthstone, days) VALUES ('January'  , 'Garnet'    , 31); -- insert into the table months; with the format (month, birthstone, days), the values: ('January', 'Garnet', 31); 
 INSERT INTO months (month, birthstone, days) VALUES ('February' , 'Amethyst'  , 29);
 INSERT INTO months (month, birthstone, days) VALUES ('March'    , 'Aquamarine', 31);
 INSERT INTO months (month, birthstone, days) VALUES ('April'    , 'Diamond'   , 30);
@@ -69,15 +65,15 @@ INSERT INTO zodiac_sign (zodiac) VALUES (   "Libra"   );
 INSERT INTO zodiac_sign (zodiac) VALUES (  "Scorpio"  );
 INSERT INTO zodiac_sign (zodiac) VALUES ("Sagittarius");
 
-USE `finder`;
-DROP procedure IF EXISTS `insert_message`;
+USE `finder`; # use the finder database
+DROP procedure IF EXISTS `insert_message`; # drop the previous procedure named insert_message if it exists
 
-DELIMITER $$
-USE `finder`$$
-CREATE definer=`ROOT`@`localhost`PROCEDURE`insert_message`(rate SMALLINT, usrmsg VARCHAR(888))
-BEGINE
-INSERT INTO message (rating, usrmessage) VALUE (rate, usrmsg);
-SELECT LAST_INSERT_ID();
+DELIMITER $$ # set out delimeter
+USE `finder`$$ # use the finder database
+CREATE definer=`ROOT`@`localhost`PROCEDURE`insert_message`(rate SMALLINT, usrmsg VARCHAR(888)) # create a definer for the root localhost, and create a procedure named insert_message while passing in 2 parameters
+BEGIN # begin the procedure
+INSERT INTO message (rating, usrmessage) VALUE (rate, usrmsg); # insert into the message table a rating and a message with the values of our parameters
+SELECT LAST_INSERT_ID(); # select the last inserted id from the table
 
-END$$ 
+END$$ # end the stored procedure
 
