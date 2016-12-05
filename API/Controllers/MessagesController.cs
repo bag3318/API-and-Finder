@@ -80,7 +80,7 @@ namespace API.Controllers // define api namespace: controller
         [HttpPost] // specify the http protocal method
         [ActionName("AddMessage")] // add our action name
 
-        public Message AddMessage(Message message) // define a new public method of type Message named add message while passing message of type Messsage
+        public Message AddMessage(Message usrmessage) // define a new public method of type Message named add message while passing message of type Messsage
         {
 
             MySqlConnection mySqlConnection = new MySqlConnection(connectionString); // define new mysql connection = to a connection string
@@ -89,15 +89,15 @@ namespace API.Controllers // define api namespace: controller
             try
             {
                 mySqlConnection.Open(); // open mySql connection
-                foreach (Message message1 in message.Messages) // for each of the messages in the messages column in the db table
+                foreach (Message message in usrmessage.Messages) // for each of the messages in the messages column in the db table
                 {
-                    paramsList.Add("ID", message.Id);
-                    paramsList.Add("usrmsg", message.Messages); // do the same thing for message
+                    paramsList.Add("id", message.Id);
+                    paramsList.Add("usrmsg", message.Message1); // do the same thing for message
                     paramsList.Add("rate", message.Rating); // and for rating
                     int status = ExecSPWithParams("insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 
                     if (status > 0) // if the status is greater than zero
                     {
-                        message.Id = paramsList["ID"].ToString(); // add the id to a string
+                        message.Id = paramsList["id"].ToString(); // add the id to a string
                     }
                     else
                     {
@@ -106,20 +106,20 @@ namespace API.Controllers // define api namespace: controller
                 }
                 mySqlConnection.Close(); // close the connection
                 
-                return message; // and return the message
+                return usrmessage; // and return the message
 
             }
             catch (MySqlException mySqlException) // for our catch statement, we put the general exception first
             {
-                message.ExcptnMsg = mySqlException.Message; // so we output the error here
-                message.Id = "0"; // set the message's id = to 0
-                return message; // and return the message itself to make sure all code paths return a value
+                usrmessage.ExcptnMsg = mySqlException.Message; // so we output the error here
+                usrmessage.Id = "0"; // set the message's id = to 0
+                return usrmessage; // and return the message itself to make sure all code paths return a value
             }
             catch (Exception err) // then we put this exception in our second catch statement
             {
-                message.ExcptnMsg = err.Message; // output the error message here
-                message.Id = "0"; // set the messsage's id = 0
-                return message; // and return the message
+                usrmessage.ExcptnMsg = err.Message; // output the error message here
+                usrmessage.Id = "0"; // set the messsage's id = 0
+                return usrmessage; // and return the message
             }
             finally // finally (this will execute no matter what)
             {

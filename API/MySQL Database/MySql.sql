@@ -74,10 +74,10 @@ DROP procedure IF EXISTS `insert_message`;
 
 DELIMITER $$
 USE `finder`$$
-create definer=`root`@`localhost`procedure`insert_message`(rate smallint, usrmsg varchar(888))
-begin
-insert into message (rating, usrmessage) values (rate, usrmsg);
-select LAST_INSERT_ID();
+CREATE definer=`ROOT`@`localhost`PROCEDURE`insert_message`(rate SMALLINT, usrmsg VARCHAR(888))
+BEGINE
+INSERT INTO message (rating, usrmessage) VALUE (rate, usrmsg);
+SELECT LAST_INSERT_ID();
 
 END$$ 
 
