@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using Newtonsoft.Json;
 
 namespace API.Models
 {
@@ -23,13 +23,17 @@ namespace API.Models
             get { return rating; }
             set { rating = value; }
         }
+        [JsonIgnore]
         private List<Message> messages;
+        [JsonIgnore]
         public List<Message> Messages
         {
             get { return messages; }
             set { messages = value; }
         }
+        [JsonIgnore]
         private string excptnMsg;
+        [JsonIgnore]
         public string ExcptnMsg
         {
             get { return excptnMsg; }
@@ -42,6 +46,7 @@ namespace API.Models
             get { return isDbChangeSuccessful; }
             set { isDbChangeSuccessful = value; }
         }
+        
         private bool status;
         public bool Status
         {
