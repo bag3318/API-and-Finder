@@ -89,7 +89,8 @@ namespace API.Controllers // define api namespace: controller
             try
             {
                 mySqlConnection.Open(); // open mySql connection
-                foreach (Message message in usrmessage.Messages) // for each of the messages in the messages column in the db table
+                /*
+                foreach (Message message in usrmessage) // for each of the messages in the messages column in the db table
                 {
                     paramsList.Add("usrmsg", message.Message1); // do the same thing for message
                     paramsList.Add("rate", message.Rating); // and for rating
@@ -102,6 +103,18 @@ namespace API.Controllers // define api namespace: controller
                     {
                         message.Id = "1"; // else set the id equal to 1
                     }
+                }*/
+                 paramsList.Add("usrmsg", usrmessage.Message1);
+                paramsList.Add("rate", usrmessage.Rating);
+                int status = ExecSPWithParams("dbo.insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 
+
+                if (status > 0) // if the status is greater than zero
+                {
+                    usrmessage.Id= paramsList["id"].ToString(); // add the id to a string
+                }
+                else
+                {
+                    usrmessage.Id = "1"; // else set the id equal to 1
                 }
                 mySqlConnection.Close(); // close the connection
               
