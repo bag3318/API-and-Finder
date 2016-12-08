@@ -91,7 +91,6 @@ namespace API.Controllers // define api namespace: controller
                 mySqlConnection.Open(); // open mySql connection
                 foreach (Message message in usrmessage.Messages) // for each of the messages in the messages column in the db table
                 {
-                    paramsList.Add("id", message.Id);
                     paramsList.Add("usrmsg", message.Message1); // do the same thing for message
                     paramsList.Add("rate", message.Rating); // and for rating
                     int status = ExecSPWithParams("insert_message", paramsList); // call Message.cs model to get the status of executeSPwithparams 

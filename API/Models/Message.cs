@@ -25,16 +25,6 @@ namespace API.Models
             set { rating = value; }
         }
         //  [JsonIgnore]
-
-        private List<Message> messages;
-        //   [JsonIgnore]
-        public List<Message> Messages
-        {
-            // get { if (messages == null) { messages.ToString() = /*something*/ "1" } return messages; }
-            get { return messages; }
-            
-            set { messages = value; }
-        }
      //   [JsonIgnore]
         private string excptnMsg;
       //  [JsonIgnore]
